@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import About from "./components/pages/About";
-import TodoList from "./components/pages/TodoList";
+import About from "./pages/About";
+import TodoList from "./containers/TodoList";
 import Header from "./components/layout/Header";
-import Home from "./components/pages/Home";
+import Home from "./pages/Home";
+import AddTodo from "./containers/AddTodo";
 import "./Reset.css";
 class App extends Component {
   render() {
@@ -13,7 +14,15 @@ class App extends Component {
           <Header />
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
-          <Route path="/todo" component={TodoList} />
+          <Route
+            path="/todo"
+            render={props => (
+              <React.Fragment>
+                <AddTodo />
+                <TodoList />
+              </React.Fragment>
+            )}
+          />
         </Router>
       </React.Fragment>
     );
