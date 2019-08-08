@@ -13,7 +13,8 @@ class AddTodo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: ""
+      title: "",
+      count: 0
     };
   }
 
@@ -21,18 +22,33 @@ class AddTodo extends React.Component {
     e.preventDefault();
 
     if (this.state.title === "") {
-      this.props.dispatch(error("文字を入力してね"));
+      this.props.dispatch(error("文字を入力してね！"));
       return;
     }
+
+    if (this.state.title.length > 35) {
+      return;
+    }
+
     this.props.dispatch(error(""));
     this.props.dispatch(add(this.state.title));
+
     this.setState({
-      title: ""
+      title: "",
+      count: 0
     });
   };
   handleChange = e => {
+    const length = e.target.value.length;
+    if (length > 35) {
+      this.props.dispatch(error("文字数が多すぎるよ！"));
+    } else {
+      this.props.dispatch(error(""));
+    }
+
     this.setState({
-      title: e.target.value
+      title: e.target.value,
+      count: length
     });
   };
   render() {
@@ -64,6 +80,8 @@ class AddTodo extends React.Component {
           >
             Add
           </Button>
+          <br />
+          {this.state.count}/35
         </form>
         <div className="error" style={{ color: "red" }}>
           {this.props.errors}
