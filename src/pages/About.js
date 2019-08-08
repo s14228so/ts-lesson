@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 const About = () => {
   return (
-    <div>
+    <div style={{ width: "80%", margin: "20px auto" }}>
       <h4>About</h4>
+      <p>This is About Page.</p>
     </div>
   );
 };
