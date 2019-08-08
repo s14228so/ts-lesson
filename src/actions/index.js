@@ -8,6 +8,12 @@ export const add = title => {
   };
 };
 
+export const filter = () => {
+  return {
+    type: "FILTER_TODO"
+  };
+};
+
 export const remove = id => {
   return {
     type: "REMOVE_TODO",

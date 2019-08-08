@@ -11,7 +11,15 @@ const todos = (state = [], action) => {
       ];
     case "REMOVE_TODO":
       return state.filter(item => {
-        return item.id !== action.id;
+        if (item.id === action.id) {
+          item.completed = !item.completed;
+        }
+        return !item.completed;
+      });
+
+    case "FILTER_TODO":
+      return state.filter(item => {
+        return item.completed;
       });
     default:
       return state;
