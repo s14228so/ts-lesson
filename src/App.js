@@ -4,13 +4,14 @@ import About from "./components/pages/About";
 import TodoList from "./components/pages/TodoList";
 import Header from "./components/layout/Header";
 import Home from "./components/pages/Home";
+import "./Reset.css";
 class App extends Component {
   render() {
     return (
       <React.Fragment>
         <Router>
           <Header />
-          <Route path="/" component={Home} />
+          <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/todo" component={TodoList} />
         </Router>
