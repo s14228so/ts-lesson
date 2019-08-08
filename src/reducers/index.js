@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 import todos from "./todos";
-
+import errors from "./errors";
 export default combineReducers({
-  todos
+  todos,
+  errors
   //ここの名前がstate名になる
 });

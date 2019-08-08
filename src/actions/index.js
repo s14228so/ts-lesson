@@ -14,3 +14,10 @@ export const remove = id => {
     id
   };
 };
+
+export const error = text => {
+  return {
+    type: "NO_TEXT_ERROR",
+    text
+  };
+};
