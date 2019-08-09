@@ -1,14 +1,12 @@
 import { db } from "../plugins/firebase";
 
 export const init = () => async dispatch => {
-  const todos = [];
+  let todos;
   const snapshot = await db.collection("todos").get();
-  await snapshot.forEach(doc =>
-    todos.push({
-      id: doc.id,
-      ...doc.data()
-    })
-  );
+  todos = snapshot.map(item => ({
+    id: item.id,
+    ...item.data()
+  }));
   dispatch({
     type: "INIT",
     payload: todos
