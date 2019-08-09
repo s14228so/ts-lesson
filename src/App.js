@@ -6,7 +6,15 @@ import Header from "./components/layout/Header";
 import Home from "./pages/Home";
 import AddTodo from "./containers/AddTodo";
 import "./Reset.css";
+import firebase, { db } from "./plugins/firebase";
 class App extends Component {
+  componentDidMount() {
+    db.collection("todos")
+      .get()
+      .then(res => {
+        console.log(res.data());
+      });
+  }
   render() {
     return (
       <React.Fragment>
