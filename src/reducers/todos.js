@@ -1,14 +1,9 @@
 const todos = (state = [], action) => {
   switch (action.type) {
+    case "INIT":
+      return action.payload;
     case "ADD_TODO":
-      return [
-        ...state,
-        {
-          id: action.id,
-          title: action.title,
-          completed: false
-        }
-      ];
+      return [...state, action.payload];
     case "REMOVE_TODO":
       return state.filter(item => {
         if (item.id === action.id) {

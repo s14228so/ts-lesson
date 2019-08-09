@@ -6,8 +6,13 @@ import Header from "./components/layout/Header";
 import Home from "./pages/Home";
 import AddTodo from "./containers/AddTodo";
 import "./Reset.css";
-import firebase, { db } from "./plugins/firebase";
+import { init } from "./actions";
+import { connect } from "react-redux";
+
 class App extends Component {
+  componentDidMount() {
+    this.props.init();
+  }
   render() {
     return (
       <React.Fragment>
@@ -30,4 +35,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  { init }
+)(App);
