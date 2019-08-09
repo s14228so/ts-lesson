@@ -8,6 +8,9 @@ export const add = title => {
   };
 };
 
+export const init = () => dispatch => {
+  console.log(dispatch());
+};
 export const filter = () => {
   return {
     type: "FILTER_TODO"
