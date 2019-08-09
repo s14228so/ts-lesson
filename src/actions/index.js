@@ -3,7 +3,8 @@ import { db } from "../plugins/firebase";
 export const init = () => async dispatch => {
   let todos;
   const snapshot = await db.collection("todos").get();
-  todos = snapshot.map(item => ({
+  console.log(snapshot);
+  todos = snapshot.docs.map(item => ({
     id: item.id,
     ...item.data()
   }));
