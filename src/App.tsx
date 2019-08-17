@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import * as React from "react";
+import { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import About from "./pages/About";
 import TodoList from "./containers/TodoList";

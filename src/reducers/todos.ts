@@ -1,4 +1,6 @@
-const todos = (state = [], action) => {
+import Todo from "../types/todo";
+import Action from "../types/action";
+const todos = (state: Todo[] = [], action: Action) => {
   switch (action.type) {
     case "INIT":
       return action.payload;
