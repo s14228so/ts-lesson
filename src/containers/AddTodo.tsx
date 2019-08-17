@@ -1,22 +1,11 @@
 import { useDispatch } from "react-redux";
 import React, { FunctionComponent, useState } from "react";
-import { add, error } from "../actions";
+import { add, addError } from "../actions";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Error from "../types/error";
 import newTodo from "../types/newTodo";
-// import { AppState } from "../reducers";
 
-// const mapStateToProps = (state: AppState ): any => {
-//   return {
-//     errors: state.errors
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch: any): any => {
-//   add: (title: string) => dispatch(add(title))
-//   error: (title: string) => dispatch(error(title))
-// };
 interface HTMLElementEvent<T extends HTMLElement> extends Event {
   target: T;
 }
@@ -26,25 +15,27 @@ interface MessageInputEvent extends React.FormEvent<HTMLInputElement> {
 
 const AddTodo: FunctionComponent = (): JSX.Element => {
   // type FormElem = React.FormEvent<HTMLInputElement>;
-  const [newTodo, setTodo] = useState<newTodo>();
-  const [error, setError] = useState<Error>();
+  const [newTodo, setTodo] = useState<newTodo>({
+    title: "",
+    count: 0
+  });
+  const [error, setError] = useState<Error>({
+    message: ""
+  });
   const dispatch = useDispatch();
 
-  const handleSubmit = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ): void => {
+  const handleSubmit = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
-
+    console.log("aaaaaaaaaaa");
     if (newTodo.title === "") {
       setError({ message: "文字を入力してね！" });
       return;
-    }
-
-    if (newTodo.title.length > 35) {
+    } else if (newTodo.title.length > 35) {
       return;
     }
 
     setError({ message: "" });
+    dispatch(addError(""));
     dispatch(add(newTodo.title));
 
     setTodo({
@@ -55,18 +46,14 @@ const AddTodo: FunctionComponent = (): JSX.Element => {
   const handleChange = (e: MessageInputEvent): void => {
     const length: number = e.target.value.length;
     if (length > 35) {
-      dispatch(setError({ message: "文字数が多すぎるよ！" }));
+      dispatch(addError("文字数が多すぎるよ！"));
     } else {
-      dispatch(setError({ message: "" }));
+      dispatch(addError(""));
     }
     setTodo({
-      title: "",
-      count: 0
+      title: e.target.value,
+      count: length
     });
-    // setTodo({
-    //   title: e.target.value,
-    //   count: length
-    // });
   };
   // this.props.dispatch(add("aaaaa"));
   return (
@@ -96,7 +83,7 @@ const AddTodo: FunctionComponent = (): JSX.Element => {
         {newTodo.count}/35
       </form>
       <div className="error" style={{ color: "red" }}>
-        {error}
+        {error.message}
       </div>
     </div>
   );

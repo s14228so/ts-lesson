@@ -47,7 +47,7 @@ export const remove = id => async dispatch => {
   });
 };
 
-export const error = text => {
+export const addError = text => {
   return {
     type: "NO_TEXT_ERROR",
     text

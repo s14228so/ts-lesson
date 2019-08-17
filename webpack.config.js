@@ -1,4 +1,5 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 const rules = [
   {
@@ -20,7 +21,7 @@ const rules = [
 module.exports = {
   target: "node",
   mode: "development",
-  entry: "./src/index.tsx",
+  entry: ["@babel/polyfill", "./src/index.tsx"],
   output: {
     path: path.join(__dirname, "dist"),
     filename: "bundle.js"
@@ -31,6 +32,7 @@ module.exports = {
   },
   devServer: {
     contentBase: "./",
-    port: 5000
-  }
+    port: 3000
+  },
+  plugins: [new Dotenv()]
 };

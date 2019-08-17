@@ -4,7 +4,6 @@ import errors from "./errors";
 const rootReducer = combineReducers({
   todos,
   errors
-  //ここの名前がstate名になる
 });
 
 export default rootReducer;

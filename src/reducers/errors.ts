@@ -1,10 +1,12 @@
 import Action from "../types/action";
 import Error from "../types/error";
 
-const error = (state: Error, action: Action) => {
+const error = (state: Error = { message: "" }, action: Action) => {
   switch (action.type) {
     case "NO_TEXT_ERROR":
-      return action.title;
+      return {
+        message: action.title
+      };
     default:
       return state;
   }
