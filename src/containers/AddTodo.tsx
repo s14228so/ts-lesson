@@ -20,6 +20,9 @@ import newTodo from "../types/newTodo";
 interface HTMLElementEvent<T extends HTMLElement> extends Event {
   target: T;
 }
+interface MessageInputEvent extends React.FormEvent<HTMLInputElement> {
+  target: HTMLInputElement;
+}
 
 const AddTodo: FunctionComponent = (): JSX.Element => {
   // type FormElem = React.FormEvent<HTMLInputElement>;
@@ -27,7 +30,9 @@ const AddTodo: FunctionComponent = (): JSX.Element => {
   const [error, setError] = useState<Error>();
   const dispatch = useDispatch();
 
-  const handleSubmit = (e: HTMLElementEvent<HTMLInputElement>): void => {
+  const handleSubmit = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ): void => {
     e.preventDefault();
 
     if (newTodo.title === "") {
@@ -47,7 +52,7 @@ const AddTodo: FunctionComponent = (): JSX.Element => {
       count: 0
     });
   };
-  const handleChange = (e: HTMLElementEvent<HTMLInputElement>): void => {
+  const handleChange = (e: MessageInputEvent): void => {
     const length: number = e.target.value.length;
     if (length > 35) {
       dispatch(setError({ message: "文字数が多すぎるよ！" }));

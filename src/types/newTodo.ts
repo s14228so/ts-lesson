@@ -1,4 +1,4 @@
 export default interface newTodo {
-  title: string;
-  count: 0;
+  title: string | null;
+  count: number;
 }
