@@ -6,9 +6,6 @@ import Button from "@material-ui/core/Button";
 import Error from "../types/error";
 import newTodo from "../types/newTodo";
 
-interface HTMLElementEvent<T extends HTMLElement> extends Event {
-  target: T;
-}
 interface MessageInputEvent extends React.FormEvent<HTMLInputElement> {
   target: HTMLInputElement;
 }
@@ -26,17 +23,18 @@ const AddTodo: FunctionComponent = (): JSX.Element => {
 
   const handleSubmit = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
-    console.log("aaaaaaaaaaa");
+
     if (newTodo.title === "") {
       setError({ message: "文字を入力してね！" });
       return;
     } else if (newTodo.title.length > 35) {
+      setError({ message: "文字数オーバーだよ！" });
       return;
     }
+    dispatch(add(newTodo.title));
 
     setError({ message: "" });
     dispatch(addError(""));
-    dispatch(add(newTodo.title));
 
     setTodo({
       title: "",
@@ -46,9 +44,9 @@ const AddTodo: FunctionComponent = (): JSX.Element => {
   const handleChange = (e: MessageInputEvent): void => {
     const length: number = e.target.value.length;
     if (length > 35) {
-      dispatch(addError("文字数が多すぎるよ！"));
+      setError({ message: "文字数オーバーだよ！" });
     } else {
-      dispatch(addError(""));
+      setError({ message: "" });
     }
     setTodo({
       title: e.target.value,
